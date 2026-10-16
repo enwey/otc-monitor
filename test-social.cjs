@@ -1,0 +1,11 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const source=fs.readFileSync(__dirname+'/app.js','utf8');
+const context=vm.createContext({URL});
+vm.runInContext(source.slice(source.indexOf('function xLinks('),source.indexOf('async function loadSocial(')),context);
+const parse=context.xLinks;
+assert.equal(parse('https://x.com/ellengu18/status/123').account,'ellengu18');
+assert.equal(parse('https://x.com/i/communities/123').account,null);
+assert.equal(parse('@example').url,'https://x.com/example');
+assert.equal(parse('https://twitter.com/example').url,'https://x.com/example');
+for(const value of ['',null,{},'javascript:alert(1)','https://x.com.evil.test/a','https://evil.test/a','https://user@x.com/a'])assert.equal(parse(value),null);
+console.log('11 social-link checks passed');

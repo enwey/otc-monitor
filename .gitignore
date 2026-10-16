@@ -1,0 +1,24 @@
+# Local observations, user preferences, and service output
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.log
+preview-*.png
+
+# Dependencies and interpreter caches
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Credentials and machine-specific configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.DS_Store
+Thumbs.db
